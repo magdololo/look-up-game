@@ -4,7 +4,8 @@ import {Button} from "@mui/material";
 
 
 export const StyledButton = styled(Button)(({ variant }) => ({
-    width: 500,
+    width: 200,
+    height: 80,
     fontSize: 40,
     backgroundColor: "white",
     ...(variant === "contained" && {
@@ -14,3 +15,8 @@ export const StyledButton = styled(Button)(({ variant }) => ({
         backgroundColor: "blue"
     })
 }));
+
+export const Timer = styled.div`
+    font-size: 70px;
+    margin: 100px auto;
+`
