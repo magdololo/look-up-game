@@ -29,12 +29,13 @@ const Cards = ({setTime, startGame, setStartGame}: CardsProps)=> {
 
     useEffect(()=>{
         if(!startGame){
-            const generatedTable = generate(3)
+            const generatedTable = generate(8)
             console.log(generatedTable)
             const randomIndex = Math.floor(Math.random() * generatedTable.length)
             setRightCard(generatedTable[randomIndex])
             generatedTable.splice(randomIndex, 1)
             setCardsTable(generatedTable)
+            setLeftCard(null)
         }
     },[startGame])
 
@@ -43,25 +44,28 @@ const Cards = ({setTime, startGame, setStartGame}: CardsProps)=> {
             const randomIndex = Math.floor(Math.random() * cardsTable.length)
             setLeftCard(cardsTable[randomIndex])
             cardsTable.splice(randomIndex, 1)
+
             setCardsTable(cardsTable)
         }
     },[startGame])
 
     useEffect(()=>{
         const correctIcon = rightCard.find(iconId=> iconId === clickedIcon?.iconId)
+        //console.log(correctIcon)
         if(correctIcon !== undefined && leftCard && cardsTable.length > 0){
             setRightCard(leftCard)
             const randomIndex = Math.floor(Math.random() * cardsTable.length)
             setLeftCard(cardsTable[randomIndex])
             cardsTable.splice(randomIndex, 1)
+            console.log(cardsTable)
             setCardsTable(cardsTable)
-            }else {
+            }else if (cardsTable.length === 0){
                 setStartGame(false)
                 setLeftCard(null)
         }
     },[clickedIcon])
 
-
+  console.log(leftCard)
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import {StyledButton, Timer} from "../styles/Counter.components";
 
 interface CounterProps {
@@ -12,7 +12,19 @@ interface CounterProps {
 }
 
 const Counter = ({time, setTime, startGame, setStartGame}: CounterProps)=>{
+  const handleClickStartButton = ()=>{
+      setStartGame(true)
+      setTime(0)
 
+  }
+  const handleClickResetButton = () => {
+      if(startGame){
+          setStartGame(false)
+          setTime(0)
+      }else if (!startGame){
+          setTime(0)
+      }
+  }
     return (
         <div>
             <Timer>
@@ -21,7 +33,8 @@ const Counter = ({time, setTime, startGame, setStartGame}: CounterProps)=>{
                 <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
             </Timer>
             <div className="buttons">
-                <StyledButton variant={startGame ? "outlined" :"contained"} onClick={() => {setStartGame(true); setTime(0)}}>Start</StyledButton>
+                <StyledButton variant={startGame ? "outlined" :"contained"} disabled={startGame && true} onClick={() => handleClickStartButton()}>Start</StyledButton>
+                <StyledButton variant={!startGame ? "outlined" :"contained"} onClick={() => handleClickResetButton()}>Reset</StyledButton>
             </div>
         </div>
     );
