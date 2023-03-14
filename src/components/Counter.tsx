@@ -1,9 +1,7 @@
- import React from "react";
+ import React, {useEffect, useState} from "react";
 import {StyledButton, Timer} from "../styles/Counter.components";
 
 interface CounterProps {
-    time: number,
-    setTime: React.Dispatch<React.SetStateAction<number>>,
     startGame: boolean,
     setStartGame: (startGame: boolean) => void
 
@@ -11,7 +9,20 @@ interface CounterProps {
 
 }
 
-const Counter = ({time, setTime, startGame, setStartGame}: CounterProps)=>{
+const Counter = ({startGame, setStartGame}: CounterProps)=>{
+    const [time, setTime] = useState<number>(0);
+    useEffect(() => {
+        let interval: NodeJS.Timer | undefined = undefined;
+        if (startGame) {
+            console.log("first")
+            interval = setInterval(() => {
+                setTime(prevTime => prevTime + 10);
+            }, 10);
+        } else if (!startGame) {
+            clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+    }, [startGame]);
   const handleClickStartButton = ()=>{
       setStartGame(true)
       setTime(0)

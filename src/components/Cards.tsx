@@ -3,11 +3,10 @@ import {generate} from "dobble";
 import React, {useEffect, useState} from "react";
 
 interface CardsProps {
-    setTime:  React.Dispatch<React.SetStateAction<number>>,
     startGame: boolean,
     setStartGame: (startGame: boolean) => void
 }
-const Cards = ({setTime, startGame, setStartGame}: CardsProps)=> {
+const Cards = ({startGame, setStartGame}: CardsProps)=> {
 
     const [cardsTable, setCardsTable] = useState<Array<Array<number>>>([])
     const [rightCard, setRightCard] = useState<Array<number>>([])
@@ -15,21 +14,10 @@ const Cards = ({setTime, startGame, setStartGame}: CardsProps)=> {
     const [clickedIcon, setClickedIcon] = useState<{iconId: number } | null>(null)
 
 
-    useEffect(() => {
-        let interval: NodeJS.Timer | undefined = undefined;
-        if (startGame) {
-            interval = setInterval(() => {
-                setTime(prevTime => prevTime + 10);
-            }, 10);
-        } else if (!startGame) {
-            clearInterval(interval);
-        }
-        return () => clearInterval(interval);
-    }, [startGame]);
 
     useEffect(()=>{
         if(!startGame){
-            const generatedTable = generate(8)
+            const generatedTable = generate(6)
             console.log(generatedTable)
             const randomIndex = Math.floor(Math.random() * generatedTable.length)
             setRightCard(generatedTable[randomIndex])
@@ -41,17 +29,16 @@ const Cards = ({setTime, startGame, setStartGame}: CardsProps)=> {
 
     useEffect(()=>{
         if(startGame){
-            const randomIndex = Math.floor(Math.random() * cardsTable.length)
-            setLeftCard(cardsTable[randomIndex])
-            cardsTable.splice(randomIndex, 1)
-
-            setCardsTable(cardsTable)
-        }
+            console.log("second")
+                const randomIndex = Math.floor(Math.random() * cardsTable.length)
+                setLeftCard(cardsTable[randomIndex])
+                cardsTable.splice(randomIndex, 1)
+                setCardsTable(cardsTable)
+            }
     },[startGame])
 
     useEffect(()=>{
         const correctIcon = rightCard.find(iconId=> iconId === clickedIcon?.iconId)
-        //console.log(correctIcon)
         if(correctIcon !== undefined && leftCard && cardsTable.length > 0){
             setRightCard(leftCard)
             const randomIndex = Math.floor(Math.random() * cardsTable.length)
@@ -65,7 +52,7 @@ const Cards = ({setTime, startGame, setStartGame}: CardsProps)=> {
         }
     },[clickedIcon])
 
-  console.log(leftCard)
+console.log(leftCard)
 
     return (
         <>
