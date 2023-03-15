@@ -5,19 +5,21 @@ import React, {useEffect, useState} from "react";
 interface CardsProps {
     startGame: boolean,
     setStartGame: (startGame: boolean) => void
+    numberOfSymbols: number
 }
-const Cards = ({startGame, setStartGame}: CardsProps)=> {
+const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
 
     const [cardsTable, setCardsTable] = useState<Array<Array<number>>>([])
     const [rightCard, setRightCard] = useState<Array<number>>([])
     const [leftCard, setLeftCard] = useState<Array<number> | null>([])
     const [clickedIcon, setClickedIcon] = useState<{iconId: number } | null>(null)
-
+    //console.log(numberOfSymbols)
 
 
     useEffect(()=>{
         if(!startGame){
-            const generatedTable = generate(6)
+            console.log(numberOfSymbols)
+            const generatedTable = generate(numberOfSymbols)
             console.log(generatedTable)
             const randomIndex = Math.floor(Math.random() * generatedTable.length)
             setRightCard(generatedTable[randomIndex])
@@ -25,7 +27,7 @@ const Cards = ({startGame, setStartGame}: CardsProps)=> {
             setCardsTable(generatedTable)
             setLeftCard(null)
         }
-    },[startGame])
+    },[startGame, numberOfSymbols])
 
     useEffect(()=>{
         if(startGame){
