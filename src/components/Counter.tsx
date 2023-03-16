@@ -2,11 +2,8 @@
 import {StyledButton, Timer} from "../styles/Counter.components";
 
 interface CounterProps {
-    startGame: boolean,
-    setStartGame: (startGame: boolean) => void
-
-
-
+    startGame: boolean;
+    setStartGame: (startGame: boolean) => void;
 }
 
 const Counter = ({startGame, setStartGame}: CounterProps)=>{
@@ -14,7 +11,6 @@ const Counter = ({startGame, setStartGame}: CounterProps)=>{
     useEffect(() => {
         let interval: NodeJS.Timer | undefined = undefined;
         if (startGame) {
-            console.log("first")
             interval = setInterval(() => {
                 setTime(prevTime => prevTime + 10);
             }, 10);

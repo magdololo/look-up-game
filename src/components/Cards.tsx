@@ -1,11 +1,39 @@
+import React, {useEffect, useState} from "react";
 import Card from "./Card";
 import {generate} from "dobble";
-import React, {useEffect, useState} from "react";
+import {createTheme, ThemeProvider, Typography} from "@mui/material";
+import {CardsComponent} from "../styles/Cards.components";
 
 interface CardsProps {
     startGame: boolean,
     setStartGame: (startGame: boolean) => void
     numberOfSymbols: number
+}
+const theme = createTheme();
+theme.typography.h4 = {
+    fontSize: '1rem',
+    letterSpacing: '0.05em',
+    margin: '3em 1em 0 1em',
+    color: 'gray',
+    '@media (min-width:800px)': {
+        fontSize: '1.2rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '1.5rem',
+    },
+}
+
+theme.typography.h6 = {
+    fontSize: '1.1rem',
+    letterSpacing: '0.05em',
+    marginTop: '1.5em',
+    color: 'gray',
+    '@media (min-width:600px)': {
+        fontSize: '1.2rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '1.8rem',
+    },
 }
 const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
 
@@ -13,14 +41,11 @@ const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
     const [rightCard, setRightCard] = useState<Array<number>>([])
     const [leftCard, setLeftCard] = useState<Array<number> | null>([])
     const [clickedIcon, setClickedIcon] = useState<{iconId: number } | null>(null)
-    //console.log(numberOfSymbols)
 
 
     useEffect(()=>{
         if(!startGame){
-            console.log(numberOfSymbols)
             const generatedTable = generate(numberOfSymbols)
-            console.log(generatedTable)
             const randomIndex = Math.floor(Math.random() * generatedTable.length)
             setRightCard(generatedTable[randomIndex])
             generatedTable.splice(randomIndex, 1)
@@ -31,7 +56,6 @@ const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
 
     useEffect(()=>{
         if(startGame){
-            console.log("second")
                 const randomIndex = Math.floor(Math.random() * cardsTable.length)
                 setLeftCard(cardsTable[randomIndex])
                 cardsTable.splice(randomIndex, 1)
@@ -46,22 +70,23 @@ const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
             const randomIndex = Math.floor(Math.random() * cardsTable.length)
             setLeftCard(cardsTable[randomIndex])
             cardsTable.splice(randomIndex, 1)
-            console.log(cardsTable)
             setCardsTable(cardsTable)
             }else if (cardsTable.length === 0){
                 setStartGame(false)
                 setLeftCard(null)
         }
     },[clickedIcon])
-
-console.log(leftCard)
-
+console.log(clickedIcon)
     return (
         <>
-            <div style={{width: "max-content", margin: "10em auto", textAlign: "center", display: "flex", }}>
+            <ThemeProvider theme={theme}>
+                <Typography variant='h4'> Kliknij prawidłowy symbol na karcie z lewej strony!</Typography>
+                <Typography variant='h6'>Pozostało: <span style={{color: 'black'}}>{cardsTable.length}</span> kart.</Typography>
+            </ThemeProvider>
+            <CardsComponent>
                 <Card iconSet={leftCard} setClickedIcon={setClickedIcon}/>
                 <Card iconSet={rightCard} setClickedIcon={null} />
-            </div>
+            </CardsComponent>
         </>
     )
 }

@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-export interface SingleCardProps{
-    primary: boolean
-}
-export const SingleCard = styled.div`
-    
-    width: 500px;
-    height: 500px;
-    border: 1px solid blue;
-    border-radius: 50%;
-  
-  @media(max-width: 800px){
+export const CardsComponent = styled.div`
+  width: 100vw;
+  margin: 2em auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  @media(min-width: 800px){
+    width: max-content;
+    flex-direction: row;
    
   }
  

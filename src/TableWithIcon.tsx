@@ -105,8 +105,8 @@ export const icons = [
         id: 20
     },
     {
-        name: "Electronic waste",
-        path: "icons/electronic-waste.svg",
+        name: "Water cup",
+        path: "icons/water-cup.svg",
         id: 21
     },
     {
@@ -304,6 +304,56 @@ export interface Coordinate {
     id: number
 }
 export const coordinates: Array<Coordinate> = [
+    {
+        x: 90,
+        y: 100,
+        id: 1
+    },
+    {
+        x: 240,
+        y: 70,
+        id: 2
+    },
+    {
+        x: 340,
+        y: 100,
+        id: 3
+    },
+    {
+        x: 80,
+        y: 220,
+        id: 4
+    },
+    {
+        x: 240,
+        y: 220,
+        id: 5
+    },
+    {
+        x: 370,
+        y: 220,
+        id: 6
+    },
+    {
+        x: 90,
+        y: 340,
+        id: 7
+    },
+    {
+        x: 210,
+        y: 390,
+        id: 8
+    },
+    {
+        x: 320,
+        y: 350,
+        id: 9
+    },
+
+
+]
+
+export  const mobileCoordinates: Array<Coordinate> = [
     {
         x: 90,
         y: 100,
