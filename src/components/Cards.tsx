@@ -4,24 +4,17 @@ import {generate} from "dobble";
 import {createTheme, ThemeProvider, Typography} from "@mui/material";
 import {CardsComponent} from "../styles/Cards.components";
 
+
 interface CardsProps {
-    startGame: boolean,
-    setStartGame: (startGame: boolean) => void
-    numberOfSymbols: number
+    startGame: boolean;
+    setStartGame: (startGame: boolean) => void;
+    numberOfSymbols: number;
+    setAnimation: (animation: boolean) => void;
+    endGame: boolean;
+    setEndGame: (endGame: boolean) => void;
+    setStart: (activeStartButton: boolean) => void;
 }
 const theme = createTheme();
-theme.typography.h4 = {
-    fontSize: '1rem',
-    letterSpacing: '0.05em',
-    margin: '3em 1em 0 1em',
-    color: 'gray',
-    '@media (min-width:800px)': {
-        fontSize: '1.2rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '1.5rem',
-    },
-}
 
 theme.typography.h6 = {
     fontSize: '1.1rem',
@@ -35,7 +28,7 @@ theme.typography.h6 = {
         fontSize: '1.8rem',
     },
 }
-const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
+const Cards = ({startGame, setStartGame, numberOfSymbols, setAnimation, endGame, setEndGame, setStart}: CardsProps)=> {
 
     const [cardsTable, setCardsTable] = useState<Array<Array<number>>>([])
     const [rightCard, setRightCard] = useState<Array<number>>([])
@@ -56,6 +49,7 @@ const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
 
     useEffect(()=>{
         if(startGame){
+                setEndGame(false)
                 const randomIndex = Math.floor(Math.random() * cardsTable.length)
                 setLeftCard(cardsTable[randomIndex])
                 cardsTable.splice(randomIndex, 1)
@@ -71,17 +65,21 @@ const Cards = ({startGame, setStartGame, numberOfSymbols}: CardsProps)=> {
             setLeftCard(cardsTable[randomIndex])
             cardsTable.splice(randomIndex, 1)
             setCardsTable(cardsTable)
-            }else if (cardsTable.length === 0){
+            }else if (cardsTable.length === 0 && leftCard){
                 setStartGame(false)
                 setLeftCard(null)
+            }else if(cardsTable.length === 0){
+            setEndGame(true)
+            setAnimation(false)
+            setStart(false)
         }
-    },[clickedIcon])
-console.log(clickedIcon)
+    },[clickedIcon, startGame])
+
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Typography variant='h4'> Kliknij prawidłowy symbol na karcie z lewej strony!</Typography>
-                <Typography variant='h6'>Pozostało: <span style={{color: 'black'}}>{cardsTable.length}</span> kart.</Typography>
+                {!endGame && <Typography variant='h6'>Pozostało <span style={{color: "rgb(25, 118, 210", fontSize: "1.5rem"}}>{cardsTable.length}</span> kart.</Typography>
+                }
             </ThemeProvider>
             <CardsComponent>
                 <Card iconSet={leftCard} setClickedIcon={setClickedIcon}/>

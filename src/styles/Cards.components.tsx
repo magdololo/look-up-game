@@ -5,7 +5,8 @@ export const CardsComponent = styled.div`
   margin: 2em auto;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  
   @media(min-width: 800px){
     width: max-content;
     flex-direction: row;

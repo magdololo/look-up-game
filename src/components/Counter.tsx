@@ -1,49 +1,62 @@
  import React, {useEffect, useState} from "react";
-import {StyledButton, Timer} from "../styles/Counter.components";
+import {TimerNumbers} from "../styles/Counter.components";
+ import {Typography} from "@mui/material";
+ import Box from "@mui/material/Box";
 
 interface CounterProps {
     startGame: boolean;
-    setStartGame: (startGame: boolean) => void;
+    resetTime: boolean;
+    endGame: boolean
+
+
 }
 
-const Counter = ({startGame, setStartGame}: CounterProps)=>{
+const Counter = ({startGame, endGame, resetTime}: CounterProps)=>{
     const [time, setTime] = useState<number>(0);
+    //const [scope, setScope] = useState<string>('')
     useEffect(() => {
         let interval: NodeJS.Timer | undefined = undefined;
         if (startGame) {
             interval = setInterval(() => {
                 setTime(prevTime => prevTime + 10);
             }, 10);
+        if (endGame){
+            console.log(time)
+        }
         } else if (!startGame) {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
     }, [startGame]);
-  const handleClickStartButton = ()=>{
-      setStartGame(true)
-      setTime(0)
 
-  }
-  const handleClickResetButton = () => {
-      if(startGame){
-          setStartGame(false)
-          setTime(0)
-      }else if (!startGame){
-          setTime(0)
-      }
-  }
+    useEffect(()=>{
+        setTime(0)
+    }, [resetTime])
+
+    let scope: string = ''
+
+        if(time > 10000){
+            scope = (`${("0" + Math.floor((time / 60000) % 60)).slice(-2) + 'min'+ ' ' + ("0" + Math.floor((time / 1000) % 60)).slice(-2) + 'sek.' + ("0" + ((time / 10) % 100)).slice(-2) + 'ms'}`)
+        } else if(time < 10000){
+            scope = (`${("0" + Math.floor((time / 1000) % 60)).slice(-2) + 'sek' + ' ' + ("0" + ((time / 10) % 100)).slice(-2) + 'ms'}`)
+        }
+
     return (
-        <div>
-            <Timer>
-                <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-                <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
-                <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
-            </Timer>
-            <div className="buttons">
-                <StyledButton variant={startGame ? "outlined" :"contained"} disabled={startGame && true} onClick={() => handleClickStartButton()}>Start</StyledButton>
-                <StyledButton variant={!startGame ? "outlined" :"contained"} onClick={() => handleClickResetButton()}>Reset</StyledButton>
-            </div>
-        </div>
+        <>
+            {startGame ?
+                <TimerNumbers>
+                    <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
+                </TimerNumbers>
+                :
+                endGame &&
+                <Box>
+                <Typography variant='h6'>Koniec gry!</Typography>
+                <Typography variant='h6'>Twój wynik: {scope} </Typography>
+                </Box>
+            }
+        </>
     );
 };
 
