@@ -18,5 +18,6 @@ export const StyledButton = styled(Button)`
 `
 export const GameButtons = styled.div`
     margin-top:  2rem;
+    text-align: center;
     
     `

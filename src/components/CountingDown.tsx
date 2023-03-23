@@ -1,39 +1,60 @@
 import {useEffect, useState} from "react";
-import {Typography} from "@mui/material";
+import {Typography, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import * as React from "react";
+
+
 
 interface CountingDownProps {
     activeStartButton: boolean;
     setStartGame: (startGame: boolean) => void;
-    setShow: (show:boolean)=> void;
+
 }
-const CountingDown =({activeStartButton, setStartGame, setShow}: CountingDownProps)=>{
-    const [number, setNumber] = useState<number>(5);
+
+const CountingDown =({activeStartButton, setStartGame}: CountingDownProps)=>{
+    const [number, setNumber] = useState<number>(6);
+    const [show, setShow] = useState<boolean>(false);
+    const mobile = useMediaQuery('(max-width: 800px)')
+
+    let timeout: NodeJS.Timeout | undefined = undefined;
+    useEffect(()=>{
+        if(activeStartButton){
+            timeout = setTimeout(() => {
+                setShow(true)
+            }, 1000);
+        } else {
+            clearTimeout(timeout)
+        }
+    },[activeStartButton])
+
     useEffect(() => {
         let interval: NodeJS.Timer | undefined = undefined;
-        if (activeStartButton) {
+        if(activeStartButton){
             interval = setInterval(() => {
-                if(number > 1){
-                    setNumber(prevTime => prevTime - 1);
-                } else if (number <= 1){
-                    setStartGame(true)
-                    setShow(false)
-                    clearInterval(interval);
-                }
-            }, 1000);
+                    if(number > 1){
+                        setNumber(prevTime => prevTime - 1);
+                    } else if (number <= 1){
+                        setStartGame(true)
+                        setShow(false)
+                        clearInterval(interval);
+                    }
+                }, 1000);
+
         } else if (!activeStartButton) {
             clearInterval(interval);
         }
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+        }
     }, [activeStartButton, number]);
 
     useEffect(()=>{
-        setNumber(5)
+        setNumber(6)
     }, [activeStartButton])
+
     return(
         <>
-            <Box sx={{ width: '95%', maxWidth: 500 , margin:  "40px auto"}} className={"animatedCounting"}>
+            <Box sx={{ width: '100%', maxWidth: 500 , margin: mobile ? "0 auto" : "40px auto"}} className={show ? "animatedCounting" :"hidding"}>
                 <Typography variant={'h4'} gutterBottom>
                     {number}
                 </Typography>

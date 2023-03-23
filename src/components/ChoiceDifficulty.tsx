@@ -19,7 +19,7 @@ const ChoiceDifficulty =({numberOfSymbols, setNumberOfSymbols}: ChoiceDifficulty
 
 return (
     <>
-        <Box sx={{ width: '95%', maxWidth: 500 , margin: mobile ? "20px auto" : "40px auto" , color: "#424242"}}>
+        <Box sx={{ width: '100%', maxWidth: 'max-content' , margin: mobile ? "20px auto" : "40px auto" , color: "#424242"}}>
             <Typography variant= {mobile ? "h6" : "h4"} gutterBottom>
                 Liczba ikonek na karcie
             </Typography>

@@ -8,6 +8,7 @@ import GameControls from "./components/GameControls";
 
 import {useMediaQuery} from "@mui/material";
 import CountingDown from "./components/CountingDown";
+import {scrollTo} from "./scrollTo";
 
 
 function App() {
@@ -15,10 +16,8 @@ function App() {
     const [activeStartButton, setActiveStartButton] = useState<boolean>(false)
     const [numberOfSymbols, setNumberOfSymbols] = React.useState<number>(3);
     const [resetTime, setResetTime] = useState<boolean>(false)
-    const [animation, setAnimation] = useState<boolean>(false)
-    const [show, setShow] = useState<boolean>(false)
     const [endGame, setEndGame] = useState<boolean>(false);
-
+    const [clickReset, setClickReset] = useState<boolean>(false)
     const mobile = useMediaQuery('(max-width: 800px')
     const restartTimer = () =>{
         setResetTime(prevState => !prevState)
@@ -26,43 +25,33 @@ function App() {
    useEffect(()=>{
        if(activeStartButton && mobile){
            setEndGame(false)
-          // window.scrollTo(0, 250)
-           setAnimation(true)
-
-       } else {
-           setAnimation(false)
+           scrollTo({id: 'scrolling'})
        }
-
    },[activeStartButton])
+    useEffect(()=>{
+        if(activeStartButton){
+            setClickReset(false)
+        }
+    },[activeStartButton])
 
-   useEffect(()=>{
-       let timeout: NodeJS.Timer | undefined = undefined;
-       if (activeStartButton) {
-           timeout = setTimeout(() => {
-               setShow(true);
-           }, 1000);
-       } else if (!activeStartButton) {
-           clearTimeout(timeout);
-       }
-       return () => clearTimeout(timeout);
-   }, [activeStartButton])
 
-console.log(activeStartButton)
   return (
-     <div className={animation ? "top-position App" : "bottom-position App"}>
-      {/*<div>*/}
-        <div>
+      <div>
+        <div id={'app'}>
             <InfoAboutGame/>
             <ChoiceDifficulty numberOfSymbols={numberOfSymbols} setNumberOfSymbols={setNumberOfSymbols}/>
-            <GameControls startGame={startGame} setStartGame={setStartGame} restartTimer={restartTimer} setStart={setActiveStartButton}/>
+            <GameControls startGame={startGame} restartTimer={restartTimer} setStart={setActiveStartButton} setEndGame={setEndGame} setClickReset={setClickReset}/>
         </div>
-
-        {show && <CountingDown setStartGame={setStartGame} activeStartButton={activeStartButton} setShow={setShow}/>}
-        {<Counter startGame={startGame} resetTime={resetTime} endGame={endGame}/>}
-
-        <Cards startGame={startGame} setStartGame={setStartGame} numberOfSymbols={numberOfSymbols} setAnimation={setAnimation} endGame={endGame} setEndGame={setEndGame} setStart={setActiveStartButton}/>
-
-    </div>
+        <div id={'scrolling'} className={'scrolling'}>
+            <div >
+                <CountingDown setStartGame={setStartGame} activeStartButton={activeStartButton}/>
+            </div>
+            <div>
+                <Counter startGame={startGame} resetTime={resetTime} endGame={endGame} clickReset={clickReset}/>
+            </div>
+            <Cards startGame={startGame} setStartGame={setStartGame} numberOfSymbols={numberOfSymbols} endGame={endGame} setEndGame={setEndGame} setStart={setActiveStartButton}/>
+        </div>
+     </div>
   );
 }
 

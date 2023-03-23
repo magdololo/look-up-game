@@ -1,15 +1,15 @@
-
 import React from "react";
 import {GameButtons, StyledButton} from "../styles/GameControls.components";
 
 interface GameControlsProps {
     startGame: boolean;
-    setStartGame: (startGame: boolean) => void;
     restartTimer: () => void;
     setStart: (activeStartButton: boolean) => void;
+    setEndGame: (endGame: boolean) => void;
+    setClickReset: (clickReset: boolean) => void;
 
 }
-const GameControls = ({startGame, setStartGame, restartTimer, setStart}: GameControlsProps) => {
+const GameControls = ({startGame, restartTimer, setStart, setEndGame, setClickReset}: GameControlsProps) => {
     const handleClickStartButton = ()=>{
         setStart(true)
         restartTimer()
@@ -17,14 +17,15 @@ const GameControls = ({startGame, setStartGame, restartTimer, setStart}: GameCon
     }
     const handleClickResetButton = () => {
         if(startGame){
-            setStartGame(false)
-            //setStart(false)
-            restartTimer()
-
+            setStart(false)
+            setEndGame(true)
+            setClickReset(true)
         }else if (!startGame){
             restartTimer()
+            setEndGame(false)
         }
     }
+
     return (
         <>
             <GameButtons >

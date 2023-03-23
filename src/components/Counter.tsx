@@ -6,23 +6,21 @@ import {TimerNumbers} from "../styles/Counter.components";
 interface CounterProps {
     startGame: boolean;
     resetTime: boolean;
-    endGame: boolean
+    endGame: boolean;
+    clickReset: boolean;
 
 
 }
 
-const Counter = ({startGame, endGame, resetTime}: CounterProps)=>{
+const Counter = ({startGame, endGame, resetTime, clickReset}: CounterProps)=>{
     const [time, setTime] = useState<number>(0);
-    //const [scope, setScope] = useState<string>('')
+
     useEffect(() => {
         let interval: NodeJS.Timer | undefined = undefined;
         if (startGame) {
             interval = setInterval(() => {
                 setTime(prevTime => prevTime + 10);
             }, 10);
-        if (endGame){
-            console.log(time)
-        }
         } else if (!startGame) {
             clearInterval(interval);
         }
@@ -50,11 +48,14 @@ const Counter = ({startGame, endGame, resetTime}: CounterProps)=>{
                     <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
                 </TimerNumbers>
                 :
-                endGame &&
-                <Box>
-                <Typography variant='h6'>Koniec gry!</Typography>
-                <Typography variant='h6'>Twój wynik: {scope} </Typography>
-                </Box>
+                (endGame && !clickReset) ?
+                    <Box>
+                        <Typography variant='h6'>Koniec gry!</Typography>
+                        <Typography variant='h6'>Twój wynik: {scope} </Typography>
+                    </Box>
+                    :
+                    !endGame && <></>
+
             }
         </>
     );

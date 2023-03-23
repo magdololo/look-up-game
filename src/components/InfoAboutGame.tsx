@@ -6,6 +6,7 @@ theme.typography.h4 = {
     letterSpacing: '0.05em',
     margin: '3em 1em 0 1em',
     color: 'gray',
+    textAlign: 'center',
     '@media (min-width:800px)': {
         fontSize: '1.2rem',
     },
