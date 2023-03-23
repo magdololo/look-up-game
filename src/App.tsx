@@ -34,7 +34,7 @@ function App() {
         }
     },[activeStartButton])
 
-
+console.log("app")
   return (
       <div>
         <div id={'app'}>

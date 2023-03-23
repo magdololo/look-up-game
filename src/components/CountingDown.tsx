@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
-import {Typography, useMediaQuery} from "@mui/material";
+import { useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import * as React from "react";
+import {Number} from "../styles/CountingDown.component";
 
 
 
@@ -54,10 +55,9 @@ const CountingDown =({activeStartButton, setStartGame}: CountingDownProps)=>{
 
     return(
         <>
-            <Box sx={{ width: '100%', maxWidth: 500 , margin: mobile ? "0 auto" : "40px auto"}} className={show ? "animatedCounting" :"hidding"}>
-                <Typography variant={'h4'} gutterBottom>
-                    {number}
-                </Typography>
+
+            <Box sx={{ width: '100%', maxWidth: 500 , margin: mobile ? "0 auto" : "40px auto"}} >
+                {show && <Number>{number}</Number>}
             </Box>
         </>
     )
