@@ -1,18 +1,17 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import { useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {Number} from "../styles/CountingDown.component";
+import {GameContext} from "../App";
 
 
 
-interface CountingDownProps {
-    activeStartButton: boolean;
-    setStartGame: (startGame: boolean) => void;
 
-}
 
-const CountingDown =({activeStartButton, setStartGame}: CountingDownProps)=>{
+const CountingDown =()=>{
+
+    const {setStartGame, activeStartButton} = useContext(GameContext)
     const [number, setNumber] = useState<number>(6);
     const [show, setShow] = useState<boolean>(false);
     const mobile = useMediaQuery('(max-width: 800px)')

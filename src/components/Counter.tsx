@@ -1,18 +1,16 @@
- import React, {useEffect, useState} from "react";
+ import React, {useContext, useEffect, useState} from "react";
 import {TimerNumbers} from "../styles/Counter.components";
  import {Typography} from "@mui/material";
  import Box from "@mui/material/Box";
+ import {GameContext} from "../App";
 
 interface CounterProps {
-    startGame: boolean;
     resetTime: boolean;
-    endGame: boolean;
     clickReset: boolean;
-
-
 }
 
-const Counter = ({startGame, endGame, resetTime, clickReset}: CounterProps)=>{
+const Counter = ({resetTime, clickReset}: CounterProps)=>{
+    const {startGame, endGame} = useContext(GameContext)
     const [time, setTime] = useState<number>(0);
 
     useEffect(() => {

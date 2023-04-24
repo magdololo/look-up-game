@@ -3,15 +3,14 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/NativeSelect';
 import {Typography, useMediaQuery} from "@mui/material";
+import {useContext} from "react";
+import {GameContext} from "../App";
 
 interface SelectChangeEvent{
  target: (EventTarget & HTMLSelectElement) | (EventTarget & {value: string, name: string})
 }
-interface  ChoiceDifficultyProps {
-    numberOfSymbols: number
-    setNumberOfSymbols: (numberOfSymbols:number) => void;
-}
-const ChoiceDifficulty =({numberOfSymbols, setNumberOfSymbols}: ChoiceDifficultyProps)=>{
+const ChoiceDifficulty =()=>{
+    const {numberOfSymbols, setNumberOfSymbols} = useContext(GameContext)
     const mobile = useMediaQuery('(max-width:800px)');
     const handleChange = (event: SelectChangeEvent) => {
         setNumberOfSymbols(parseInt(event.target.value));

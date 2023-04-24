@@ -1,23 +1,25 @@
-import React from "react";
+import React, {useContext} from "react";
 import {GameButtons, StyledButton} from "../styles/GameControls.components";
+import {GameContext} from "../App";
 
 interface GameControlsProps {
-    startGame: boolean;
+
     restartTimer: () => void;
-    setStart: (activeStartButton: boolean) => void;
-    setEndGame: (endGame: boolean) => void;
+
     setClickReset: (clickReset: boolean) => void;
 
 }
-const GameControls = ({startGame, restartTimer, setStart, setEndGame, setClickReset}: GameControlsProps) => {
+const GameControls = ({ restartTimer, setClickReset}: GameControlsProps) => {
+    const {startGame, setActiveStartButton} = useContext(GameContext)
+    const {setEndGame} = useContext(GameContext)
     const handleClickStartButton = ()=>{
-        setStart(true)
+        setActiveStartButton(true)
         restartTimer()
 
     }
     const handleClickResetButton = () => {
         if(startGame){
-            setStart(false)
+            setActiveStartButton(false)
             setEndGame(true)
             setClickReset(true)
         }else if (!startGame){

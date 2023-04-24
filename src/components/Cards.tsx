@@ -1,24 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Card from "./Card";
 import {generate} from "dobble";
 import {createTheme, ThemeProvider, Typography} from "@mui/material";
 import {CardsComponent} from "../styles/Cards.components";
+import {GameContext} from "../App";
 
 
-interface CardsProps {
-    startGame: boolean;
-    setStartGame: (startGame: boolean) => void;
-    numberOfSymbols: number;
-    endGame: boolean;
-    setEndGame: (endGame: boolean) => void;
-    setStart: (activeStartButton: boolean) => void;
-}
 const theme = createTheme();
 
 theme.typography.h6 = {
     fontSize: '1.1rem',
     letterSpacing: '0.05em',
-    marginTop: '1.5em',
+    marginTop: '0.5em',
     color: 'gray',
     '@media (min-width:600px)': {
         fontSize: '1.2rem',
@@ -27,8 +20,8 @@ theme.typography.h6 = {
         fontSize: '1.8rem',
     },
 }
-const Cards = ({startGame, setStartGame, numberOfSymbols, endGame, setEndGame, setStart}: CardsProps)=> {
-
+const Cards = ()=> {
+    const {startGame, setStartGame, endGame, setEndGame, numberOfSymbols, setActiveStartButton} = useContext(GameContext)
     const [cardsTable, setCardsTable] = useState<Array<Array<number>>>([])
     const [rightCard, setRightCard] = useState<Array<number>>([])
     const [leftCard, setLeftCard] = useState<Array<number> | null>([])
@@ -68,7 +61,7 @@ const Cards = ({startGame, setStartGame, numberOfSymbols, endGame, setEndGame, s
                 setLeftCard(null)
             }else if(cardsTable.length === 0){
             setEndGame(true)
-            setStart(false)
+            setActiveStartButton(false)
         }
     },[clickedIcon, startGame])
 

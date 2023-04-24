@@ -14,6 +14,9 @@ const scales = keyframes`
  export const Number = styled.div`
   display: inline-block;
   animation: ${scales} 1s linear infinite;
-  padding: 2rem 1rem;
+  padding: 0.8rem 1em;
   font-size: 1.6rem;
+  @media only screen and (max-width: 800px) and (min-height: 801px) {
+   padding: 0.8em 0;
+  }
 `;
