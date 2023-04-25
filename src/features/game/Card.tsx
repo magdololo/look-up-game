@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState} from 'react';
-import {icons, coordinates} from "../TableWithIcon";
+import {icons, coordinates} from "../../utils/TableWithIcon";
 import {useMediaQuery} from "@mui/material";
 interface CardProps {
     iconSet: Array<number> | null

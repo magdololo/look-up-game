@@ -2,8 +2,8 @@ import {useContext, useEffect, useState} from "react";
 import { useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import * as React from "react";
-import {Number} from "../styles/CountingDown.component";
-import {GameContext} from "../App";
+import {Number} from "../../styles/CountingDown.component";
+import {GameContext} from "./Game";
 
 
 

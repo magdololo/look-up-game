@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {GameButtons, StyledButton} from "../styles/GameControls.components";
-import {GameContext} from "../App";
+import {GameButtons, StyledButton} from "../../styles/GameControls.components";
+import {GameContext} from "./Game";
 
 interface GameControlsProps {
 

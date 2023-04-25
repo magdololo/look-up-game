@@ -2,8 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import Card from "./Card";
 import {generate} from "dobble";
 import {createTheme, ThemeProvider, Typography} from "@mui/material";
-import {CardsComponent} from "../styles/Cards.components";
-import {GameContext} from "../App";
+import {CardsComponent} from "../../styles/Cards.components";
+import {GameContext} from "./Game";
 
 
 const theme = createTheme();

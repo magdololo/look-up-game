@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/NativeSelect';
 import {Typography, useMediaQuery} from "@mui/material";
 import {useContext} from "react";
-import {GameContext} from "../App";
+import {GameContext} from "./Game";
 
 interface SelectChangeEvent{
  target: (EventTarget & HTMLSelectElement) | (EventTarget & {value: string, name: string})

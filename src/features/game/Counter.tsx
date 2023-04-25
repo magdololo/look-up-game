@@ -1,8 +1,8 @@
  import React, {useContext, useEffect, useState} from "react";
-import {TimerNumbers} from "../styles/Counter.components";
+import {TimerNumbers} from "../../styles/Counter.components";
  import {Typography} from "@mui/material";
  import Box from "@mui/material/Box";
- import {GameContext} from "../App";
+ import {GameContext} from "./Game";
 
 interface CounterProps {
     resetTime: boolean;
