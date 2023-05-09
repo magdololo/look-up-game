@@ -4,6 +4,8 @@ import {generate} from "dobble";
 import {createTheme, ThemeProvider, Typography} from "@mui/material";
 import {CardsComponent} from "../../styles/Cards.components";
 import {GameContext} from "./Game";
+import {useTranslation} from "react-i18next";
+import NumberOfRemainingCards from "./NumberOfRemainingCards";
 
 
 const theme = createTheme();
@@ -12,7 +14,6 @@ theme.typography.h6 = {
     fontSize: '1.1rem',
     letterSpacing: '0.05em',
     marginTop: '0.5em',
-    color: 'gray',
     '@media (min-width:600px)': {
         fontSize: '1.2rem',
     },
@@ -21,6 +22,7 @@ theme.typography.h6 = {
     },
 }
 const Cards = ()=> {
+    const { t } = useTranslation();
     const {startGame, setStartGame, endGame, setEndGame, numberOfSymbols, setActiveStartButton} = useContext(GameContext)
     const [cardsTable, setCardsTable] = useState<Array<Array<number>>>([])
     const [rightCard, setRightCard] = useState<Array<number>>([])
@@ -79,7 +81,7 @@ const Cards = ()=> {
         <>
 
             <ThemeProvider theme={theme}>
-                {!endGame  && <Typography variant='h6' style={{textAlign: 'center'}}>Pozostało <span style={{color: "rgb(25, 118, 210", fontSize: "1.5rem"}}>{cardsTable.length}</span> kart.</Typography>}
+                {!endGame  && <Typography variant='h6' style={{textAlign: 'center'}}>{t("cards.cards_left_starts")} <NumberOfRemainingCards cardsNumber={cardsTable.length}/>{t("cards.cards_left_ends")}.</Typography>}
             </ThemeProvider>
             <CardsComponent>
                 <Card iconSet={leftCard} setClickedIcon={setClickedIcon}/>

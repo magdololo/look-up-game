@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import {Suspense} from 'react';
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./features/LandingPage";
 import Game from "./features/game/Game";

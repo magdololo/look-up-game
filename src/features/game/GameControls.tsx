@@ -3,11 +3,8 @@ import {GameButtons, StyledButton} from "../../styles/GameControls.components";
 import {GameContext} from "./Game";
 
 interface GameControlsProps {
-
     restartTimer: () => void;
-
     setClickReset: (clickReset: boolean) => void;
-
 }
 const GameControls = ({ restartTimer, setClickReset}: GameControlsProps) => {
     const {startGame, setActiveStartButton} = useContext(GameContext)

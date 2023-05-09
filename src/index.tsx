@@ -8,6 +8,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './fonts/Courgette/Courgette-Regular.ttf';
 import './i18n';
+import { ThemeContextProvider } from './ThemeContextProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
       <BrowserRouter>
-          <App />
+          <ThemeContextProvider>
+            <App />
+          </ThemeContextProvider>
       </BrowserRouter>
   </React.StrictMode>
 );

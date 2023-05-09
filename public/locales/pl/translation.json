@@ -2,6 +2,14 @@
   "landingPage": {
     "subtitle1": "Wyszukaj taki sam symbol na obydwu kartach i kliknij go na odkrywanej karcie. Uważaj! To gra na czas!",
     "subtitle2": "Podnieś stopień trudności i zwiększ ilość ikonek na karcie! Baw się dobrze!"
-  }
-
+  },
+  "cards": {
+    "cards_left_starts": "Pozostało",
+    "cards_left_ends": "kart"
+  },
+  "number_icons_on_the_card": "Liczba ikonek na karcie.",
+  "end_game" : "Koniec gry!",
+  "scope": "Twój wynik",
+  "info_about_game_desktop": "Kliknij prawidłowy symbol na karcie z lewej strony!",
+  "info_about_game_mobile": " Kliknij prawidłowy symbol na dolnej karcie!"
 }

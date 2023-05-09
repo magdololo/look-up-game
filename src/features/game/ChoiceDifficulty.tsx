@@ -5,11 +5,13 @@ import Select from '@mui/material/NativeSelect';
 import {Typography, useMediaQuery} from "@mui/material";
 import {useContext} from "react";
 import {GameContext} from "./Game";
+import {useTranslation} from "react-i18next";
 
 interface SelectChangeEvent{
  target: (EventTarget & HTMLSelectElement) | (EventTarget & {value: string, name: string})
 }
 const ChoiceDifficulty =()=>{
+    const { t } = useTranslation()
     const {numberOfSymbols, setNumberOfSymbols} = useContext(GameContext)
     const mobile = useMediaQuery('(max-width:800px)');
     const handleChange = (event: SelectChangeEvent) => {
@@ -18,9 +20,9 @@ const ChoiceDifficulty =()=>{
 
 return (
     <>
-        <Box sx={{ width: '100%', maxWidth: 'max-content' , margin: mobile ? "20px auto" : "40px auto" , color: "#424242"}}>
+        <Box sx={{ width: '100%', maxWidth: 'max-content' , margin: mobile ? "20px auto" : "40px auto"}}>
             <Typography variant= {mobile ? "h6" : "h4"} gutterBottom>
-                Liczba ikonek na karcie
+                {t("number_icons_on_the_card")}
             </Typography>
         </Box>
         <Box sx={{ width: "200px" , margin: "0 auto"}}>

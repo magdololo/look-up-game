@@ -5,10 +5,10 @@ import Cards from "./Cards";
 import ChoiceDifficulty from "./ChoiceDifficulty";
 import InfoAboutGame from "./InfoAboutGame";
 import GameControls from "./GameControls";
-
 import {useMediaQuery} from "@mui/material";
 import CountingDown from "./CountingDown";
 import {scrollTo} from "../../utils/scrollTo";
+import {DarkModeToggle} from "../../components/DarkModeToggle";
 
 export interface GameControls {
     startGame: boolean
@@ -72,6 +72,7 @@ function App() {
             activeStartButton,
             setActiveStartButton
         }}>
+            <DarkModeToggle/>
             <InfoAboutGame/>
             <ChoiceDifficulty/>
             <GameControls restartTimer={restartTimer} setClickReset={setClickReset}/>

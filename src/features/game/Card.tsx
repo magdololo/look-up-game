@@ -1,6 +1,7 @@
-import React, { useEffect, useCallback, useState} from 'react';
+import React, {useEffect, useCallback, useState, useContext} from 'react';
 import {icons, coordinates} from "../../utils/TableWithIcon";
 import {useMediaQuery} from "@mui/material";
+import {ThemeContext} from "../../ThemeContextProvider";
 interface CardProps {
     iconSet: Array<number> | null
     setClickedIcon: ((clickedIcon: {iconId: number}) => void) | null;
@@ -14,6 +15,10 @@ const Card = React.memo( ({iconSet, setClickedIcon}: CardProps) => {
     const allocatedIcons: Array<{iconId: number, coordinateId: number}> = []
     const mobile = useMediaQuery('(max-width:850px)');
     const sizeMultiplier: number = mobile ? 0.6 : 1
+    const {theme} = useContext(ThemeContext)
+    let themeMode = true
+    if(theme === "light") {themeMode = true}
+    if(theme === "dark") {themeMode = false}
     const drawIcons = (ctx: CanvasRenderingContext2D) => {
 
         let iconSize =  mobile ? 30 : 50;
@@ -76,7 +81,7 @@ const Card = React.memo( ({iconSet, setClickedIcon}: CardProps) => {
 
     return (
         <div style={{ margin: mobile ? "0 20px" : "0 50px"}}>
-            <canvas ref={handleCanvas} width={mobile ? 300 : 500} height={mobile ? 300 : 500} style={{border: "1px solid blue", borderRadius: "50%"}} onClick={(event) => handleCanvasClick(event)}/>
+            <canvas ref={handleCanvas} width={mobile ? 300 : 500} height={mobile ? 300 : 500} style={{border: `1px solid ${themeMode ? "rgb(26, 119, 210)" : "rgb(144, 202, 249)"}`, borderRadius: "50%"}} onClick={(event) => handleCanvasClick(event)}/>
         </div>
     );
 });

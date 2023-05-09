@@ -3,6 +3,7 @@ import {TimerNumbers} from "../../styles/Counter.components";
  import {Typography} from "@mui/material";
  import Box from "@mui/material/Box";
  import {GameContext} from "./Game";
+ import {useTranslation} from "react-i18next";
 
 interface CounterProps {
     resetTime: boolean;
@@ -10,6 +11,7 @@ interface CounterProps {
 }
 
 const Counter = ({resetTime, clickReset}: CounterProps)=>{
+    const { t } = useTranslation()
     const {startGame, endGame} = useContext(GameContext)
     const [time, setTime] = useState<number>(0);
 
@@ -48,8 +50,8 @@ const Counter = ({resetTime, clickReset}: CounterProps)=>{
                 :
                 (endGame && !clickReset) ?
                     <Box>
-                        <Typography variant='h6'>Koniec gry!</Typography>
-                        <Typography variant='h6'>Twój wynik: {scope} </Typography>
+                        <Typography variant='h6'>{t("end_game")}</Typography>
+                        <Typography variant='h6'>{t("scope")}: {scope} </Typography>
                     </Box>
                     :
                     !endGame && <></>

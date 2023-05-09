@@ -1,0 +1,15 @@
+{
+  "landingPage": {
+    "subtitle1": "Zài liǎng zhāng kǎpiàn shàng sōusuǒ xiāngtóng de fúhào, ránhòu zài xiǎnshì de kǎpiàn shàng dān jī tā. Dāngxīn! Zhè shì yīgè shíjiān guǎnlǐ yóuxì!",
+    "subtitle2": "Tígāo nándù bìng zēngjiā kǎpiàn shàng de túbiāo shùliàng! Wán dé kāixīn!"
+  },
+  "cards": {
+    "cards_left_starts": "Hái shèng",
+    "cards_left_ends": "zhāng pái"
+  },
+  "number_icons_on_the_card": "Kǎpiàn shàng de túbiāo shùliàng.",
+  "end_game" : "Yóuxì jiéshù!",
+  "scope": "Nǐ de fēnshù",
+  "info_about_game_desktop": "Dān jī zuǒ cè xuǎnxiàng kǎ shàng de zhèngquè fúhào!",
+  "info_about_game_mobile": " Dān jī dǐbù xuǎnxiàng kǎ shàng de zhèngquè fúhào!"
+}
